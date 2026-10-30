@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#090d18">
+<title>svtrybiographia — Resmî Profil</title>
+<style>
+:root {
+  --bg:#090d18;
+  --panel:#111a2b;
+  --muted:#9aa8bd;
+  --text:#f4f7ff;
+  --accent:#7c9cff;
+  --line:rgba(255,255,255,.09);
+}
+* { box-sizing:border-box; }
+html { scroll-behavior:smooth; }
+body {
+  margin:0;
+  color:var(--text);
+  background:radial-gradient(ellipse at 80% 0%,#1b2b52 0,transparent 36%),var(--bg);
+  font-family:Inter,system-ui,-apple-system,"Segoe UI",Arial,sans-serif;
+}
+a { color:inherit;text-decoration:none; }
+.wrap { width:min(1080px,calc(100% - 40px));margin:auto; }
+
+nav {
+  height:76px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  border-bottom:1px solid var(--line);
+}
+.brand { font-weight:800;letter-spacing:.3px; }
+.brand span { color:var(--accent); }
+.navlinks { display:flex;gap:26px;color:var(--muted);font-size:14px; }
+.navlinks a:hover { color:white; }
+
+.hero {
+  padding:88px 0 70px;
+  display:grid;
+  grid-template-columns:1.25fr .75fr;
+  gap:45px;
+  align-items:center;
+}
+.eyebrow {
+  display:inline-flex;
+  align-items:center;
+  gap:9px;
+  padding:8px 12px;
+  border:1px solid var(--line);
+  border-radius:999px;
+  color:#c6d2ea;
+  font-size:12px;
+  letter-spacing:1.4px;
+  text-transform:uppercase;
+}
+.dot {
+  width:7px;
+  height:7px;
+  border-radius:50%;
+  background:#69e0b1;
+  box-shadow:0 0 14px #69e0b1;
+}
+h1 {
+  font-size:clamp(42px,7vw,76px);
+  line-height:1.02;
+  letter-spacing:-3px;
+  margin:23px 0 18px;
+}
+.gradient {
+  background:linear-gradient(100deg,#fff 10%,#9bb5ff 55%,#b69aff);
+  -webkit-background-clip:text;
+  background-clip:text;
+  color:transparent;
+}
+.lead {
+  max-width:570px;
+  color:var(--muted);
+  font-size:17px;
+  line-height:1.8;
+}
+.actions {
+  display:flex;
+  gap:12px;
+  flex-wrap:wrap;
+  margin-top:30px;
+}
+.btn {
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  padding:13px 19px;
+  border-radius:12px;
+  font-weight:700;
+  font-size:14px;
+  border:1px solid var(--line);
+  transition:.2s;
+}
+.btn.primary {
+  background:linear-gradient(110deg,#668bff,#9878f6);
+  border:0;
+  color:white;
+  box-shadow:0 10px 30px #667fff35;
+}
+.btn:hover,.card:hover { transform:translateY(-3px); }
+
+.profile-card {
+  padding:28px;
+  border:1px solid var(--line);
+  border-radius:24px;
+  background:linear-gradient(145deg,#17233a,#101726);
+  box-shadow:0 25px 80px #0005;
+  position:relative;
+  overflow:hidden;
+}
+.profile-card:before {
+  content:"";
+  position:absolute;
+  width:210px;
+  height:210px;
+  border-radius:50%;
+  background:#718fff22;
+  right:-80px;
+  top:-100px;
+}
+.avatar {
+  width:76px;
+  height:76px;
+  border-radius:22px;
+  background:linear-gradient(135deg,#789cff,#a47df6);
+  display:grid;
+  place-items:center;
+  font-size:28px;
+  font-weight:900;
+  margin-bottom:20px;
+}
+.profile-card h2 { margin:0 0 7px;font-size:23px; }
+.profile-card p {
+  color:var(--muted);
+  font-size:14px;
+  line-height:1.6;
+  margin:0;
+}
+.profile-meta {
+  display:flex;
+  gap:8px;
+  margin-top:24px;
+  flex-wrap:wrap;
+}
+.pill {
+  font-size:12px;
+  color:#cbd7f1;
+  background:#ffffff0b;
+  border:1px solid var(--line);
+  padding:7px 10px;
+  border-radius:999px;
+}
+
+section { padding:38px 0 72px; }
+.section-head {
+  display:flex;
+  align-items:end;
+  justify-content:space-between;
+  gap:20px;
+  margin-bottom:24px;
+}
+.section-head h2 {
+  font-size:30px;
+  letter-spacing:-1px;
+  margin:0 0 7px;
+}
+.section-head p {
+  color:var(--muted);
+  margin:0;
+  font-size:14px;
+}
+.grid {
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:15px;
+}
+.card {
+  background:linear-gradient(145deg,#141f33,#101725);
+  border:1px solid var(--line);
+  border-radius:18px;
+  padding:21px;
+  display:flex;
+  align-items:center;
+  gap:16px;
+  transition:.2s;
+  min-width:0;
+}
+.icon {
+  width:48px;
+  height:48px;
+  border-radius:14px;
+  background:#ffffff0d;
+  display:grid;
+  place-items:center;
+  font-size:22px;
+  flex:none;
+}
+.card-info { min-width:0;flex:1; }
+.card h3 { font-size:16px;margin:0 0 5px; }
+.handle {
+  color:var(--muted);
+  font-size:13px;
+  overflow-wrap:anywhere;
+  line-height:1.5;
+}
+.open {
+  color:#a9bcff;
+  font-size:13px;
+  font-weight:700;
+  white-space:nowrap;
+}
+.note {
+  margin-top:18px;
+  padding:15px 17px;
+  border:1px dashed #52658c;
+  border-radius:13px;
+  color:var(--muted);
+  font-size:13px;
+  line-height:1.6;
+}
+footer {
+  border-top:1px solid var(--line);
+  padding:25px 0;
+  color:var(--muted);
+  font-size:13px;
+  display:flex;
+  justify-content:space-between;
+  gap:15px;
+  flex-wrap:wrap;
+}
+
+@media(max-width:720px) {
+  .hero {
+    grid-template-columns:1fr;
+    padding:60px 0 45px;
+    gap:30px;
+  }
+  h1 { letter-spacing:-2px; }
+  .navlinks { gap:14px;font-size:12px; }
+  .grid { grid-template-columns:1fr; }
+  .section-head {
+    align-items:start;
+    flex-direction:column;
+  }
+}
+@media(max-width:420px) {
+  .wrap { width:min(100% - 28px,1080px); }
+  nav { height:66px; }
+  .navlinks { gap:10px; }
+  .navlinks a { font-size:11px; }
+}
+</style>
+</head>
+
+<body>
+
+<header class="wrap">
+<nav>
+  <a class="brand" href="#anasayfa">
+    svtry<span>biographia</span>
+  </a>
+  <div class="navlinks">
+    <a href="#anasayfa">Ana sayfa</a>
+    <a href="#secenekler">Seçenekler</a>
+    <a href="#iletisim">İletişim</a>
+  </div>
+</nav>
+</header>
+
+<main>
+<div class="wrap">
+
+<section class="hero" id="anasayfa">
+  <div>
+    <div class="eyebrow">
+      <span class="dot"></span>
+      Kişisel profil • Resmî bağlantılar
+    </div>
+
+    <h1>
+      Merhaba,<br>
+      <span class="gradient">svtrybiographia</span>
+    </h1>
+
+    <p class="lead">
+      Dijital dünyadaki profilime hoş geldin.
+      Sosyal medya ve oyun platformlarındaki
+      hesaplarımı aşağıdaki seçeneklerden keşfedebilirsin.
+    </p>
+
+    <div class="actions">
+      <a class="btn primary" href="#secenekler">
+        Hesapları keşfet ↗
+      </a>
+      <a class="btn" href="#iletisim">İletişim</a>
+    </div>
+  </div>
+
+  <aside class="profile-card">
+    <div class="avatar">S</div>
+    <h2>svtrybiographia</h2>
+    <p>
+      Tek noktadan tüm sosyal medya ve oyun profillerime ulaş.
+    </p>
+    <div class="profile-meta">
+      <span class="pill">Sosyal medya</span>
+      <span class="pill">Gaming</span>
+      <span class="pill">Türkiye</span>
+    </div>
+  </aside>
+</section>
+
+<section id="secenekler">
+  <div class="section-head">
+    <div>
+      <h2>Hesaplar &amp; seçenekler</h2>
+      <p>Platformunu seç ve profil bağlantını aç.</p>
+    </div>
+  </div>
+
+  <div class="grid">
+
+    <!-- INSTAGRAM -->
+    <a class="card"
+       href="https://www.instagram.com/svttry/"
+       target="_blank"
+       rel="noopener noreferrer">
+      <div class="icon">◎</div>
+      <div class="card-info">
+        <h3>Instagram</h3>
+        <div class="handle">@svttry</div>
+      </div>
+      <span class="open">Aç ↗</span>
+    </a>
+
+    <!-- YOUTUBE -->
+    <a class="card"
+       href="https://www.youtube.com/@Bursa_Sefiri"
+       target="_blank"
+       rel="noopener noreferrer">
+      <div class="icon">▶</div>
+      <div class="card-info">
+        <h3>YouTube</h3>
+        <div class="handle">(Svtry)Bursa_Sefiri</div>
+      </div>
+      <span class="open">Aç ↗</span>
+    </a>
+
+    <!-- PUBG MOBILE -->
+    <a class="card"
+       href="https://www.pubgmobile.com/"
+       target="_blank"
+       rel="noopener noreferrer">
+      <div class="icon">🎮</div>
+      <div class="card-info">
+        <h3>PUBG Mobile</h3>
+        <div class="handle">SĮVĮTĮRĮY</div>
+      </div>
+      <span class="open">Aç ↗</span>
+    </a>
+
+    <!-- STANDOFF 2 -->
+    <a class="card"
+       href="https://standoff2.com/"
+       target="_blank"
+       rel="noopener noreferrer">
+      <div class="icon">⚡</div>
+      <div class="card-info">
+        <h3>Standoff 2</h3>
+        <div class="handle">
+          Bursa Sefiri · ID: 278346679
+        </div>
+      </div>
+      <span class="open">Aç ↗</span>
+    </a>
+
+    <!-- ROBLOX -->
+    <a class="card"
+       href="https://www.roblox.com/search/users?keyword=VTxSvtry"
+       target="_blank"
+       rel="noopener noreferrer">
+      <div class="icon">◇</div>
+      <div class="card-info">
+        <h3>Roblox</h3>
+        <div class="handle">
+          Username: VTxSvtry · Name: Drax1625
+        </div>
+      </div>
+      <span class="open">Aç ↗</span>
+    </a>
+
+  </div>
+
+  <div class="note">
+    PUBG Mobile ve Standoff 2 kartları oyunların resmî sitelerini açar.
+    Roblox bağlantısı kullanıcı adı aramasına gider.
+    Hesap adları verdiğin bilgilere göre yazılmıştır.
+  </div>
+</section>
+
+<section id="iletisim" style="padding-top:0">
+  <div class="section-head">
+    <div>
+      <h2>Bağlantıda kalalım</h2>
+      <p>
+        Güncel profillerim ve içeriklerim için hesaplarıma göz atabilirsin.
+      </p>
+    </div>
+  </div>
+
+  <a class="btn primary" href="#secenekler">
+    Platformları görüntüle ↗
+  </a>
+</section>
+
+</div>
+</main>
+
+<footer class="wrap">
+  <span>
+    © <span id="year"></span> svtrybiographia. Tüm hakları saklıdır.
+  </span>
+  <span>Modern • Kişisel • Dijital</span>
+</footer>
+
+<script>
+document.getElementById("year").textContent =
+  new Date().getFullYear();
+</script>
+
+</body>
+  </html>
